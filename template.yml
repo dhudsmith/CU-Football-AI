@@ -59,5 +59,7 @@ Resources:
       ManagedPolicyArns:
         - !Sub 'arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole'
       PermissionsBoundary: !Sub 'arn:${AWS::Partition}:iam::${AWS::AccountId}:policy/CodeStar_${ProjectId}_PermissionsBoundary'
-  Database:
-    Type: AWS::RDS::DBInstance
+Database:
+	Type: AWS::RDS::DBInstance
+	Properties: 
+		AllocatedStorage: 10
