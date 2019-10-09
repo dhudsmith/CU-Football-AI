@@ -62,4 +62,5 @@ Resources:
   Database:
     Type: AWS::RDS::DBInstance
     Properties: 
-      AllocatedStorage: 10
+      AllocatedStorage: 5
+      DBInstanceClass: db.t3.micro
