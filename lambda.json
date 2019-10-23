@@ -1,0 +1,23 @@
+{
+  "lambda": {
+    "FunctionName": "box-node-lambda-sample",
+    "Handler": "index.handler",
+    "Runtime": "nodejs6.10",
+    "Description": "Demonstrates how to call Box APIs from a Lambda function using the Box Node SDK",
+    "Environment": {
+      "Variables": {
+        "BOX_CONFIG": "Enter your JSON config string"
+      }
+    }
+  },
+  "version": "0.1.5",
+  "license": "Apache-2.0",
+  "tags": [
+    "nodejs",
+    "box",
+    "ext-libraries"
+  ],
+  "authors": [
+    "Box <oss@box.com>"
+  ]
+}
