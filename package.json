@@ -1,5 +1,5 @@
 {
-  "name": "box-node-aws-to-lambda",
+  "name": "box-node-lambda-to-aws",
   "version": "1.4.2",
   "description": "Box to AWS Lambda",
   "main": "index.js",
@@ -17,8 +17,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "zip": "rm -rf node_modules/asn1/tst; zip -rMM9 box-node-lambda-sample index.js node_modules",
-    "bp": "rm -rf node_modules/asn1/tst; zip -rMM9 box-node-lambda-sample-bp index.js lambda.json node_modules",
+    "zip": "rm -rf node_modules/asn1/tst; zip -rMM9 box-node-lambda-to-aws index.js node_modules",
+    "bp": "rm -rf node_modules/asn1/tst; zip -rMM9 box-node-lambda-to-aws-bp index.js lambda.json node_modules",
     "lint": "eslint index.js"
   },
   "author": "Rex Oliver <rexroao@g.clemson.edu>",
