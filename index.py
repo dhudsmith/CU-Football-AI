@@ -12,7 +12,7 @@ const BoxSDK = require('box-node-sdk');
 // Load the config from an environment variable for security and configuration management.
 const boxConfig = JSON.parse(process.env.BOX_CONFIG);
 
-const sdk = BoxSDK.getPreconfiguredInstance(boxConfig);
+const sdk = BoxSDK.getPreconfiguredInstance(boxConfig); 
 
 /**
  * Create a service account client that performs actions in the context of the specified
