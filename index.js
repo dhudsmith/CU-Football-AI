@@ -38,6 +38,8 @@ exports.downloader = (filename, context, callback) => {
     var fs = require('fs');
     client.folders.create(0, '', (err, result) => {...});
     client.folders.getItems(0, null, (err, result) => {...});
+    // Get file differences
+    // 					       
 	   // if (error) {
 		    // handle error
 	   // }
