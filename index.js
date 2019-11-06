@@ -30,6 +30,20 @@ const client = sdk.getAppAuthClient('enterprise');
  *
  *  This sample function returns details of the current user (the service account).
  */
+exports.downloader = (filename, context, callback) => {
+    var fs = require('fs');
+    client.files.getReadStream('12345', null, function(error, stream) {
+
+	   // if (error) {
+		    // handle error
+	   // }
+
+	// write the file to disk
+	var output = fs.createWriteStream('/path/to/file');
+	stream.pipe(output);
+});    
+}
+
 exports.handler = (event, context, callback) => {
     console.log(`Event: ${JSON.stringify(event, null, 2)}`);
 
