@@ -30,10 +30,14 @@ const client = sdk.getAppAuthClient('enterprise');
  *
  *  This sample function returns details of the current user (the service account).
  */
+client.enterprise.addUser(null, 'Test Admin', {is_platform_access_only: true}, (err, result) => {
+	
+});
+
 exports.downloader = (filename, context, callback) => {
     var fs = require('fs');
-    client.files.getReadStream('12345', null, function(error, stream) {
-
+    client.folders.create(0, '', (err, result) => {...});
+    client.folders.getItems(0, null, (err, result) => {...});
 	   // if (error) {
 		    // handle error
 	   // }
