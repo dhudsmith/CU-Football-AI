@@ -1,34 +1,65 @@
-{
-  "lambda": {
-    "FunctionName": "box-node-lambda-to-aws",
-    "Handler": "index.handler",
-    "Runtime": "nodejs6.10",
-    "Description": "Gets Box Data to AWS",
-    "Environment": {
-      "Variables": {
-        "BOX_CONFIG": "{
-          "boxAppSettings": {
-            "clientID": "74l9fqwf2huvzjepwmivso97hsvbdiv1",
-            "clientSecret": "XWlYmjRNjA5r9veD627wFbUguUzm1IdM",
-            "appAuth": {
-              "publicKeyID": "1i5if79a",
-               "privateKey": "-----BEGIN ENCRYPTED PRIVATE KEY-----\nMIIFDjBABgkqhkiG9w0BBQ0wMzAbBgkqhkiG9w0BBQwwDgQIrZgpU+svorcCAggA\nMBQGCCqGSIb3DQMHBAhKFV+2EkYAcQSCBMgf2ozfJhUmId0DD8MixVvuL7fhGLbH\nBUETeL0pCL+CwSYxZy7dexM2RbHF7oXEYXTNR5hcTO62m5cLs24vyfrEMl9SKNPm\n+Nf4qjtvn2o0K6snBer/MwsNHZePf88AQGp5r3A62K9hDkrcHia2YfsqKRq/kzth\nzVYfvv0Rbdwu3HqYfPmoPWXS800AwugMJCVwGYglVUSpzLNDBdnwR+laeZKBaRt+\n7skyCgCaPI7A3uvUYN78ZYZpbuC+GGAYiFKwo1jKcOC1eeEqHJjP101oCFD9Ja4k\n3Y5Za6IcvJ6pBIOeRfzvvti2a8c3y2Siu5k9uctBmzgxNiiH3dWMVnbiL6xUiOV3\nbzztJVZUyLCgNIV85oxoM/jVmZ1AG6JTiqwMP114c56v3uZwf+k58M2y5ErKXF+J\nr6ix+GXzfpRYhIh4n9Q+5OlbrVv5t2spli+Kj1g7eDWvIMB8Ul7mM49m3OASgL4j\nWe3fvP+3bYq4sO098ilmc+JNCag4tyD3zjO+NqjG0OoB2ffppWShLF5ROBBVDgYj\nt8tPpoDIZELtB+XKvV+RGu9/ajI3DGVHS5To35HYKqwF4pb6xbIKJbU35MOT2UTC\niu/Lm3U7S9aOpJSvWf6zllORpBF6WVoM2LusSnL2s9o5iM05BSVlE6vykJVA3VXG\nSO8vD3kQqzietYvqL0A3N2H7ynI+NunZ6lRKpg0Ubuk8K+TWrlePoUI2qWgX5y2w\nNvM3MoM0nsnVCf74b34DDm9Y++FVp7dimyW3aT8brSTNByRug3j27x2RFQeEqg6o\n+p4bMicGcHDbfUnNEQ4xHWZJirMiBqK+uzyzA49cf2gRoSSFypbvRxUvkwkek02s\nE8dcwPuL0rWPkrAPOWko4U6xdQjfmPsg21A5EuZnn+BoE5hOTCjltLkVi+4BHGBN\noxQEy9OqIij4TquVdnsswg6HpVdNH2HcAAQJjve1ufxZYmg56rApZHtNr8LNhsfV\n1KILF/qUsJeumiYp3a8qsvomSO5tlkoYPLXtDh7ZmCvOy1dTiaxBTUUmWatoN5Cc\noTX862xPnW7EETM1Kckxmb7/HsJHd6Z2ext5gu+qqKXUet0ZSW2pIEUprMKEPwBG\nud+GexVBZcoDJRqJm3JFZAvL3W0GdmgRGSrN+k0ZPz/OFHWirtCkAyH0uQMtvvWT\n/C7QNY9W3VNc3YfIsnokjl0GDHj+1qUYsi2iVJ3ptHjHjeTL0i0s3rlIH+yLMaxU\nxZXcHDZzyrb2JDIlD4UJ9JBF61gVK3/QFp4Pme5m5mJQ5KA/T/PiLc8b9Z1ld3SB\nfszeoWB4PiWJMBFH49uD5+R7JsUWroXWm/yb/LvwiLdATnY7UHl/8BLdJsJhBnFe\nK5FodihPmHxsNecXqWYOVXY6NKeuWjTwl884qs1a1WPkYZDoWPHWnOQEBAwDBE0r\negKA6G3iKcUDn7QIyPewYTXF9wyfPGDug5vcvRp3bXLS/ZhY4+UAx8/EHK5XlfF5\nIE2e9FBZLBOmfbJvRYyuou9CLBdnCcE7M27D5fVoLtbyLM9TAx7iy7Dx42lXFh+B\nKyEwU4eYyxxwo64+7I7N0YQ/HvcQQpTPcD5v+T9D8k4bErCuqsVlYF1q7WCYOYbt\ndk0=\n-----END ENCRYPTED PRIVATE KEY-----\n",
-               "passphrase": "42d5be4c34ddc32db54860e94e4b5723"
-            }
-          },
-          "enterpriseID": "145149"
-        }"
-      }
+/**
+ * This sample shows how to connect a Box webhook to a Lambda function via API Gateway.
+ *
+ * For step-by-step instructions on how to create a Box application and a webhook,
+ * see https://github.com/box/samples/tree/master/box-node-webhook-to-lambda-sample
+ */
+const BoxSDK = require('box-node-sdk');
+
+// Load the config from an environment variable for security and configuration management.
+const boxConfig = JSON.parse(process.env.BOX_CONFIG);
+
+/**
+ *  YOUR CODE GOES HERE!!!
+ *
+ *  This sample function simply logs details of the webhook event to Cloudwatch.
+ *  Your code could forward the event to SNS or Kinesis for further processing.
+ *  For FILE.UPLOADED events, you could use the Box Node SDK to download the file, analyze it,
+ *  and update the file on Box with metadata that contains the results of the analysis.
+ */
+function handleWebhookEvent(webhookEvent) {
+    // Print basic information about the Box event
+    let message = `webhook=${webhookEvent.webhook.id}`;
+
+    // The event trigger: FILE.DOWNLOADED, FILE.UPLOADED, etc.
+    message += `, trigger=${webhookEvent.trigger}`;
+
+    // The source that triggered the event: a file, folder, etc.
+    if (webhookEvent.source) {
+        const source = webhookEvent.source;
+
+        message += `, source=<${source.type} id=${source.id} name=${source.name || 'unknown'}>`;
     }
-  },
-  "version": "0.1.5",
-  "license": "Apache-2.0",
-  "tags": [
-    "nodejs",
-    "box",
-    "ext-libraries"
-  ],
-  "authors": [
-    "Rex Oliver <rexroao@g.clemson.edu>"
-  ]
+
+    console.log(`Box event: ${message}`);
+    return { statusCode: 200, body: message };
 }
+
+ // Valicates message using signing keys to make sure message was sent from box 
+ // before calling handleWebhookEvent().
+exports.handler = async (event, context) => {
+    console.log(`Event: ${JSON.stringify(event, null, 2)}`);
+
+    if (!BoxSDK.validateWebhookMessage(event.body, event.headers,
+            boxConfig.webhooks.primaryKey, boxConfig.webhooks.secondaryKey)) {
+        const response = { statusCode: 403, body: 'Message authenticity not verified' };
+        console.log(`Response: ${JSON.stringify(response, null, 2)}`);
+        return response;
+    }
+
+    if (!event.body) {
+        const response = { statusCode: 403, body: 'Missing event body' };
+        console.log(`Response: ${JSON.stringify(response, null, 2)}`);
+        return response;
+    }
+
+    // Parse the message body from the Lambda proxy
+    const body = JSON.parse(event.body);
+    console.log(`Event body: ${JSON.stringify(body, null, 2)}`);
+
+    // Handle the webhook event
+    const response = handleWebhookEvent(body);
+
+    console.log(`Response: ${JSON.stringify(response, null, 2)}`);
+    return response;
+};
